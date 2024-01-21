@@ -30,7 +30,7 @@ It also allows you to share your files with other users.
 
 # MarkDown Editor Roadmap
 
-## Version 1.0
+## Version 1.0 (Upcoming Release)
 - [ ] **MarkDown Editor:** Implement a MarkDown editor for creating and editing files.
 - [ ] **File Management:** Implement file management functionality for creating, editing, and deleting files.
 
