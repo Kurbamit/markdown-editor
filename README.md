@@ -7,8 +7,13 @@
 * [Contact](#contact)
 
 ## Description
+<<<<<<< HEAD
 This is a simple MarkDown Editor web application made with ASP.NET. 
 It allows you to create, edit and delete MarkDown files. 
+=======
+This is a simple MarkDown Editor web application made with ASP.NET.
+It allows you to create, edit and delete MarkDown files.
+>>>>>>> origin/main
 It also allows you to share your files with other users.
 
 ## Features that are implemented
@@ -30,7 +35,11 @@ It also allows you to share your files with other users.
 
 # MarkDown Editor Roadmap
 
+<<<<<<< HEAD
 ## Version 1.0 (Upcoming Release)
+=======
+## Version 1.0
+>>>>>>> origin/main
 - [ ] **MarkDown Editor:** Implement a MarkDown editor for creating and editing files.
 - [ ] **File Management:** Implement file management functionality for creating, editing, and deleting files.
 
