@@ -29,6 +29,7 @@ It also allows you to share your files with other users.
 - ASP.NET Core
 - Entity Framework Core
 - SQL Server
+- Bootstrap
 
 # MarkDown Editor Roadmap
 
