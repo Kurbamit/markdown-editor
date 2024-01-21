@@ -1,9 +1,11 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MDEdit.Models;
 
 public class MarkdownModel
 {
+    [Key]
     public Guid MarkdownId { get; set; }
     public string Title { get; set; }
     public string Content { get; set; }
