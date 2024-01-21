@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -5,8 +6,12 @@ namespace MDEdit.Models;
 
 public class UserModel
 {
+    [Key]
     public Guid UserId { get; set; }
     public string Username { get; set; }
+    
+    [Required]
+    [EmailAddress]
     public string Email { get; set; }
     public string PasswordHash { get; set; }
     public string Salt { get; set; }
