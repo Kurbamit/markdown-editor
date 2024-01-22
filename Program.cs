@@ -1,10 +1,12 @@
 using MDEdit.Models;
+using MDEdit.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IEditorIOService, EditorIOService>();
 builder.Services.AddDbContext<EditorContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("EditorContext");
