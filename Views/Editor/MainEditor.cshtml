@@ -21,16 +21,20 @@
     
     @if (Model != null)
     {
-        @foreach (var markdown in Model)
-        {
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">@markdown.Title</h5>
-                    <p class="card-text">@markdown.Content</p>
-                    <a href="@Url.Action("EditMarkdown", "Editor", new { markdownId = markdown.MarkdownId })" class="btn btn-primary">Edit</a>
+        <div class="row">
+            @foreach (var markdown in Model)
+            {
+                <div class="col-md-4"> <!-- Use col-md-4 to create three columns on medium-sized screens and larger -->
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">@markdown.Title</h5>
+                            <p class="card-text">@markdown.Content</p>
+                            <a href="@Url.Action("EditMarkdown", "Editor", new { markdownId = markdown.MarkdownId })" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     }
 </div>
 
