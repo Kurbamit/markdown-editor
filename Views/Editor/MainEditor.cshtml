@@ -5,6 +5,20 @@
 <div class="container">
     <h1 class="display-4">Markdown Editor</h1>
 
+    <form id="markdownForm">
+        <div class="form-group">
+            <label for="markdownTitle">Title:</label>
+            <input type="text" class="form-control" id="markdownTitle" />
+        </div>
+    
+        <div class="form-group">
+            <label for="markdownText">Markdown Text:</label>
+            <textarea class="form-control" id="markdownText" rows="5"></textarea>
+        </div>
+            
+        <button type="button" class="btn btn-primary" onclick="saveMarkdown()">Save</button>
+    </form>
+    
     @if (Model != null)
     {
         @foreach (var markdown in Model)
@@ -18,20 +32,6 @@
             </div>
         }
     }
-
-    <form id="markdownForm">
-        <div class="form-group">
-            <label for="markdownTitle">Title:</label>
-            <input type="text" class="form-control" id="markdownTitle" />
-        </div>
-
-        <div class="form-group">
-            <label for="markdownText">Markdown Text:</label>
-            <textarea class="form-control" id="markdownText" rows="5"></textarea>
-        </div>
-        
-        <button type="button" class="btn btn-primary" onclick="saveMarkdown()">Save</button>
-    </form>
 </div>
 
 <script src="~/js/saveMarkdown.js"></script>
