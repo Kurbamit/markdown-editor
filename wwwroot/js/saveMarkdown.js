@@ -3,7 +3,11 @@ function saveMarkdown() {
     var markdownText = $("#markdownText").val();
     var markdownId = $("#markdownId").val();
 
-    console.log("Markdown ID in saveMarkdown.js: " + markdownId);
+    if (!markdownText.trim()) {
+        alert("Markdown text is empty. Please enter some text.");
+        return;
+    }
+    
     $.ajax({
         type: "POST",
         url: "/Editor/SaveMarkdown", // Adjust the URL to match your route

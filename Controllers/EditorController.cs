@@ -30,11 +30,10 @@ namespace MDEdit.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveMarkdown(string markdownText, string? markdownTitle, Guid markdownId)
         {
-            Console.WriteLine("Markdown ID in SAVEMARKDOWN: " + markdownId);
             try
             {
                 var userId = Guid.Empty; // Change to Guid.Empty for now since there is no user authentication
-
+                
                 if (!ModelState.IsValid)
                 {
                     return Json(new { success = false, message = "ModelState is not valid." });
@@ -54,7 +53,6 @@ namespace MDEdit.Controllers
         public async Task<IActionResult> EditMarkdown(Guid markdownId)
         {
             var (success, markdown) = await _editorIOService.GetMarkdownByIdAsync(markdownId);
-            Console.WriteLine("Markdown ID: " + markdownId);
             if (!success)
             {
                 // Handle the case where the markdown is not found

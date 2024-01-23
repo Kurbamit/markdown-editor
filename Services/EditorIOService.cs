@@ -17,8 +17,6 @@ public class EditorIOService : IEditorIOService
     {
         
         var existingMarkdown = await _context.Markdowns.FindAsync(markdownId);
-        Console.WriteLine("Existing markdown: " + existingMarkdown);
-        Console.WriteLine("Existing markdown ID: " + markdownId);
         
         if (markdownTitle == null)
         {
