@@ -4,5 +4,7 @@ namespace MDEdit.Services;
 
 public interface IEditorIOService
 {
-    public Task<MarkdownModel> SaveMarkdownAsync(string markdownText, string? markdownTitle, Guid userId);
+    Task SaveMarkdownAsync(string markdownText, string? markdownTitle, Guid userId, Guid markdownId);
+    Task<IEnumerable<MarkdownModel>> GetUserMarkdownsAsync(Guid userId);
+    Task<(bool success, MarkdownModel markdown)> GetMarkdownByIdAsync(Guid markdownId);
 }

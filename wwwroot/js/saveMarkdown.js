@@ -1,12 +1,16 @@
 function saveMarkdown() {
     var markdownTitle = $("#markdownTitle").val();
     var markdownText = $("#markdownText").val();
+    var markdownId = $("#markdownId").val();
+
+    console.log("Markdown ID in saveMarkdown.js: " + markdownId);
     $.ajax({
         type: "POST",
         url: "/Editor/SaveMarkdown", // Adjust the URL to match your route
         data: { 
             markdownText: markdownText,
-            markdownTitle: markdownTitle
+            markdownTitle: markdownTitle,
+            markdownId: markdownId
         },
         success: function (data) {
             // Handle success (e.g., show a success message)

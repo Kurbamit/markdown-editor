@@ -3,7 +3,7 @@ using MDEdit.Models;
 using MDEdit.Services;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace MDEdit.Controllers
 {
@@ -17,15 +17,20 @@ namespace MDEdit.Controllers
             _logger = logger;
             _editorIOService = editorIOService;
         }
-    
-        public IActionResult Editor()
+
+        public async Task<IActionResult> Editor()
         {
-            return View("MainEditor");
+            // Assuming you have a service method to get user-specific markdowns
+            var userId = Guid.Empty; // Replace with actual user ID when implementing authentication
+            var userMarkdowns = await _editorIOService.GetUserMarkdownsAsync(userId);
+
+            return View("MainEditor", userMarkdowns);
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveMarkdown(string markdownText, string? markdownTitle)
+        public async Task<IActionResult> SaveMarkdown(string markdownText, string? markdownTitle, Guid markdownId)
         {
+            Console.WriteLine("Markdown ID in SAVEMARKDOWN: " + markdownId);
             try
             {
                 var userId = Guid.Empty; // Change to Guid.Empty for now since there is no user authentication
@@ -35,7 +40,7 @@ namespace MDEdit.Controllers
                     return Json(new { success = false, message = "ModelState is not valid." });
                 }
 
-                await _editorIOService.SaveMarkdownAsync(markdownText, markdownTitle, userId);
+                await _editorIOService.SaveMarkdownAsync(markdownText, markdownTitle, userId, markdownId);
 
                 return Json(new { success = true });
             }
@@ -44,6 +49,19 @@ namespace MDEdit.Controllers
                 _logger.LogError(ex, "Error saving markdown");
                 return Json(new { success = false, message = "Error saving markdown." });
             }
+        }
+
+        public async Task<IActionResult> EditMarkdown(Guid markdownId)
+        {
+            var (success, markdown) = await _editorIOService.GetMarkdownByIdAsync(markdownId);
+            Console.WriteLine("Markdown ID: " + markdownId);
+            if (!success)
+            {
+                // Handle the case where the markdown is not found
+                return RedirectToAction("Editor");
+            }
+
+            return View("EditMarkdown", markdown);
         }
     }
 }
