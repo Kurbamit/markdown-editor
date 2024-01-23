@@ -15,8 +15,10 @@
             <label for="markdownText">Markdown Text:</label>
             <textarea class="form-control" id="markdownText" rows="5"></textarea>
         </div>
-            
-        <button type="button" class="btn btn-primary" onclick="saveMarkdown()">Save</button>
+
+        <div class="my-3"> <!-- Add margin top and bottom -->
+            <button type="button" class="btn btn-primary d-block mx-auto" onclick="saveMarkdown()">Save</button>
+        </div>
     </form>
     
     @if (Model != null)
@@ -24,7 +26,7 @@
         <div class="row">
             @foreach (var markdown in Model)
             {
-                <div class="col-md-4"> <!-- Use col-md-4 to create three columns on medium-sized screens and larger -->
+                <div class="col-md-4">
                     <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title">@markdown.Title</h5>
