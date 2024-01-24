@@ -33,7 +33,7 @@ namespace MDEdit.Controllers
             try
             {
                 var userId = Guid.Empty; // Change to Guid.Empty for now since there is no user authentication
-                
+
                 if (!ModelState.IsValid)
                 {
                     return Json(new { success = false, message = "ModelState is not valid." });
@@ -60,6 +60,24 @@ namespace MDEdit.Controllers
             }
 
             return View("EditMarkdown", markdown);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveMarkdown(Guid markdownId)
+        {
+            try
+            {
+                var userId = Guid.Empty; // Change to Guid.Empty for now since there is no user authentication
+
+                await _editorIOService.RemoveMarkdownAsync(markdownId, userId);
+
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error removing markdown");
+                return Json(new { success = false, message = "Error removing markdown." });
+            }
         }
     }
 }

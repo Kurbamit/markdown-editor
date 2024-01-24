@@ -7,22 +7,22 @@ namespace MDEdit.Services;
 public class EditorIOService : IEditorIOService
 {
     private readonly EditorContext _context;
-    
+
     public EditorIOService(EditorContext context)
     {
         _context = context;
     }
-    
+
     public async Task SaveMarkdownAsync(string markdownText, string? markdownTitle, Guid userId, Guid markdownId)
     {
-        
+
         var existingMarkdown = await _context.Markdowns.FindAsync(markdownId);
-        
+
         if (markdownTitle == null)
         {
             markdownTitle = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss");
         }
-        
+
         if (existingMarkdown != null)
         {
             // Update the existing markdown
@@ -30,10 +30,10 @@ public class EditorIOService : IEditorIOService
             existingMarkdown.Title = markdownTitle;
             existingMarkdown.LastModifiedUserId = userId;
             existingMarkdown.LastModifiedDateTime = DateTime.UtcNow;
-            
+
             _context.Markdowns.Update(existingMarkdown);
             await _context.SaveChangesAsync();
-            
+
             return;
         }
 
@@ -54,7 +54,7 @@ public class EditorIOService : IEditorIOService
         _context.Markdowns.Add(markdownEntity);
         await _context.SaveChangesAsync();
     }
-    
+
     public async Task<IEnumerable<MarkdownModel>> GetUserMarkdownsAsync(Guid userId)
     {
         // Assuming you have a DbSet<MarkdownModel> named "Markdowns" in your DbContext
@@ -64,7 +64,7 @@ public class EditorIOService : IEditorIOService
 
         return userMarkdowns;
     }
-    
+
     public async Task<(bool success, MarkdownModel markdown)> GetMarkdownByIdAsync(Guid markdownId)
     {
         var markdown = await _context.Markdowns.FindAsync(markdownId);
@@ -75,5 +75,18 @@ public class EditorIOService : IEditorIOService
         }
 
         return (true, markdown);
+    }
+
+    public async Task RemoveMarkdownAsync(Guid markdownId, Guid userId)
+    {
+        var markdown = await _context.Markdowns.FindAsync(markdownId);
+
+        if (markdown == null)
+        {
+            return; // Markdown not found
+        }
+
+        _context.Markdowns.Remove(markdown);
+        await _context.SaveChangesAsync();
     }
 }
