@@ -10,7 +10,7 @@ function saveMarkdown() {
     
     $.ajax({
         type: "POST",
-        url: "/Editor/SaveMarkdown", // Adjust the URL to match your route
+        url: "/Editor/SaveMarkdown",
         data: { 
             markdownText: markdownText,
             markdownTitle: markdownTitle,
@@ -19,6 +19,16 @@ function saveMarkdown() {
         success: function (data) {
             // Handle success (e.g., show a success message)
             console.log("Markdown saved successfully.");
+        
+            // Clear Title and Markdown Text inputs
+            $("#markdownTitle").val('');
+            $("#markdownText").val('');
+        
+            // Check if the server response contains a redirect URL
+            if (data.redirectUrl) {
+                // Redirect to the specified URL
+                window.location.href = data.redirectUrl;
+            }
         },
         error: function (error) {
             // Handle error (e.g., show an error message)
