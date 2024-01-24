@@ -5,12 +5,16 @@ function removeMarkdown(markdownId) {
             url: "/Editor/RemoveMarkdown",
             data: { markdownId: markdownId },
             success: function (data) {
-                // Handle success (e.g., update UI)
-                console.log("Markdown removed.");
+                // Handle success
+                console.log("Markdown removed successfully.");
+
+                // Remove the card from the DOM
+                $("#markdownCard_" + markdownId).remove();
             },
             error: function (error) {
                 // Handle error (e.g., show an error message)
-                alert("Error removing markdown.");
+                console.error("Error removing markdown:", error);
+                alert("Error removing markdown. Please try again or reload the page.");
             }
         });
     }

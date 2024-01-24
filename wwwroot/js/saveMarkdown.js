@@ -18,7 +18,7 @@ function saveMarkdown() {
         },
         success: function (data) {
             // Handle success (e.g., show a success message)
-            alert("Markdown saved successfully!");
+            console.log("Markdown saved successfully.");
         },
         error: function (error) {
             // Handle error (e.g., show an error message)
