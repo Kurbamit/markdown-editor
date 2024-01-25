@@ -8,22 +8,20 @@ public class UserModel
 {
     [Key]
     public Guid UserId { get; set; }
-    public string Username { get; set; }
     
+    [StringLength(50, MinimumLength = 3, ErrorMessage = "Username must be between 3 and 50 characters.")]
+    public string Username { get; set; }
+
     [Required]
     [EmailAddress]
+    [StringLength(30, ErrorMessage = "Email must be less than 30 characters.")]
     public string Email { get; set; }
     public string PasswordHash { get; set; }
     public string Salt { get; set; }
-    
+
     // Navigation property to represent the many-to-many relationship
-    public ICollection<UserMarkdownModel> UserMarkdowns { get; set; }
+    public ICollection<UserMarkdownModel>? UserMarkdowns { get; set; }
 
-    public UserModel()
-    {
-
-    }
-    
     public UserModel(string username, string email, string password)
     {
         UserId = Guid.NewGuid();
@@ -32,11 +30,11 @@ public class UserModel
         Salt = GenerateSalt();
         PasswordHash = SetPassword(password);
     }
-    
+
     private string GenerateSalt()
     {
         var saltBytes = new byte[16];
-        using (var rng = new RNGCryptoServiceProvider())
+        using (var rng = RandomNumberGenerator.Create())
         {
             rng.GetBytes(saltBytes);
         }
@@ -56,13 +54,8 @@ public class UserModel
         return passwordHash;
     }
 
-    public void ToString()
+    public override string ToString()
     {
-        Console.WriteLine("User ID: " + UserId);
-        Console.WriteLine("Username: " + Username);
-        Console.WriteLine("Email: " + Email);
-        Console.WriteLine("Hashed Password: " + PasswordHash);
-        Console.WriteLine("Generated Salt: " + Salt);
-        Console.WriteLine();
+        return $"User ID: {UserId}\nUsername: {Username}\nEmail: {Email}\nHashed Password: {PasswordHash}\nGenerated Salt: {Salt}\n";
     }
 }
