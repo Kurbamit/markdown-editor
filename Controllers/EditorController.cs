@@ -1,10 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using MDEdit.Models;
 using MDEdit.Services;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
 
+#pragma warning disable IDE1006 // Naming Styles
 namespace MDEdit.Controllers
 {
     public class EditorController : Controller
@@ -81,3 +78,4 @@ namespace MDEdit.Controllers
         }
     }
 }
+#pragma warning restore IDE1006 // Naming Styles
