@@ -15,6 +15,7 @@ public class UserMarkdownModel
 
     public UserMarkdownModel()
     {
-        
+        UserId = Guid.NewGuid();
+        MarkdownId = Guid.NewGuid();
     }
 }
