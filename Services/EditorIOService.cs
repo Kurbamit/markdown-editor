@@ -1,9 +1,9 @@
-using System.Security.Cryptography.X509Certificates;
 using MDEdit.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MDEdit.Services;
 
+#pragma warning disable IDE1006 // Naming Styles
 public class EditorIOService : IEditorIOService
 {
     private readonly EditorContext _context;
@@ -90,3 +90,4 @@ public class EditorIOService : IEditorIOService
         await _context.SaveChangesAsync();
     }
 }
+#pragma warning restore IDE1006 // Naming Styles

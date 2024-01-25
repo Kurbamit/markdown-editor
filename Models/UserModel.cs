@@ -22,6 +22,11 @@ public class UserModel
     // Navigation property to represent the many-to-many relationship
     public ICollection<UserMarkdownModel>? UserMarkdowns { get; set; }
 
+    public UserModel()
+    {
+        
+    }
+    
     public UserModel(string username, string email, string password)
     {
         UserId = Guid.NewGuid();
